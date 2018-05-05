@@ -25,7 +25,6 @@
     "webpack-dev-server": "^2.11.1"
   },
   "devDependencies": {
-    "bootstrap": "^4.1.1",
     "css-loader": "^0.28.10",
     "normalize.css": "^8.0.0",
     "style-loader": "^0.20.2",
