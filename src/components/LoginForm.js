@@ -1,16 +1,12 @@
 import React from "react";
 
 export default class LoginForm extends React.Component {
-	constructor(){
-		super();
-
-		this.state = {
-			username: "",
-			password: "",
-			errors: {
-				noPassword: false,
-				noUsername: false
-			}
+	state = {
+		username: "",
+		password: "",
+		errors: {
+			noPassword: false,
+			noUsername: false
 		}
 	}
 
@@ -24,20 +20,20 @@ export default class LoginForm extends React.Component {
 		});
 	}
 
-	onSubmit = (event) => {
+	onSubmit = event => {
 		event.preventDefault();
-		const { setUsername, isUser, showCongratulation } = this.props;
+		const { setUsername, currentUser, showGreetings } = this.props;
 
 		const { username, password } = this.state;
 
 		const re = /[a-zA-Z0-9'-\s]/g;
-		let arrSym = Array.from(username).filter(sym => {
-			if(!sym.match(re)){
-				return sym;
+		let symbols = Array.from(username).filter(el => {
+			if(!el.match(re)){
+				return el;
 			}
 		});
 
-		if (arrSym.length > 0) {
+		if (symbols.length > 0) {
 			this.setState({
 					errors: {
 						noUsername: true
@@ -53,9 +49,9 @@ export default class LoginForm extends React.Component {
 				errors
 			});
 
-			if (isUser === username && password.length > 0) {
-				showCongratulation();
-			} else if (isUser === username && password.length === 0) {
+			if (currentUser === username && password.length > 0) {
+				showGreetings();
+			} else if (currentUser === username && password.length === 0) {
 				this.setState({
 					errors: {
 						noPassword: true
@@ -63,7 +59,7 @@ export default class LoginForm extends React.Component {
 				})
 			} 
 
-			if (isUser !== username && username.length > 0 && password.length > 0) {
+			if (currentUser !== username && username.length > 0 && password.length > 0) {
 				setUsername(username);
 				window.location.reload();
 

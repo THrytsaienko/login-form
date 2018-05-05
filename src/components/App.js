@@ -6,12 +6,9 @@ import LoginForm from './LoginForm';
 import LogedIn from './LogedIn';
 
 export default class App extends React.Component {
-	constructor(){
-		super();
-		this.state = {
-			username: "",
-			showCong: false
-		}
+	state = {
+		username: "",
+		greeting: false
 	}
 
 	setUsername = username => {
@@ -19,9 +16,9 @@ export default class App extends React.Component {
 		localStorage.setItem('username', json);
 	}
 
-	showCongratulation = () => {
+	showGreetings = () => {
 		this.setState({
-			showCong: true
+			greeting: true
 		})
 	}
 
@@ -36,15 +33,15 @@ export default class App extends React.Component {
 				});
 			}
 		} catch (e) {
-			// Do nothing at all
+			
 		}
 	}
 
 	render() {
-		const { username, showCong } = this.state;
+		const { username, greeting } = this.state;
 		return (
 			<div>
-				{showCong === true ? (
+				{greeting ? (
 					<LogedIn 
 						username={this.state.username}
 					/>) : (
@@ -54,8 +51,8 @@ export default class App extends React.Component {
 							<LoginSocial />
 							<LoginForm
 								setUsername = {this.setUsername}
-								isUser = {username}
-								showCongratulation = {this.showCongratulation}
+								currentUser = {username}
+								showGreetings = {this.showGreetings}
 							/>
 						</div>
 						<SignUp />
