@@ -30,8 +30,9 @@ export default class LoginForm extends React.Component {
 
 		const { username, password } = this.state;
 
+		const re = /[a-zA-Z0-9'-\s]/g;
 		let arrSym = Array.from(username).filter(sym => {
-			if(!sym.match(/[a-zA-Z0-9'-\s]/g)){
+			if(!sym.match(re)){
 				return sym;
 			}
 		});
@@ -76,49 +77,49 @@ export default class LoginForm extends React.Component {
 
 	render() {
 		return (
-			<form className="form-login-container col-md-6 needs-validation">
-					<div className="form-group">
-						<label htmlFor="username" className="font-weight-bold">Login</label>
-						<input
-							type="text"
-							className="form-control"
-							id="username"
-							value={this.state.username}
-							onChange={this.handleChange}
-							name="username"
-							required
-						/>
-						{
-							this.state.errors.noUsername ? 
-							<div className="invalid-feedback d-block">
-								Username can contain only letters, numbers, space, dash and apostrophe!
-							</div> : null
-						}
-					</div>
-					<div className="form-group">
-						<label htmlFor="exampleInputPassword1" className="font-weight-bold">Password</label>
-						<input
-							type="password"
-							className="form-control"
-							id="password"
-							value={this.state.password}
-							onChange={this.handleChange}
-							name="password"
-							required
-						/>
-						{
-							this.state.errors.noPassword ?
-							<div className="invalid-feedback d-block">Password can not be empty!</div> : null
-						}
-					</div>
-					<div className = "form-check login">
-						<input type="checkbox" className="form-check-input" id="exampleCheck1" />
-						<label className="form-check-label" htmlFor="exampleCheck1">Remember me</label>
-					</div>
-					<div className="d-flex flex-column flex-sm-row justify-content-between align-items-center">
-						<input type="submit" className="btn btn-dark mb-3" onClick={this.onSubmit} value="Log in" />
-						<a href="#" className="font-weight-bold text-dark">Need help logging in?</a>
-					</div>
+			<form className="login-form col-md-6 needs-validation">
+				<div className="login-form__group form-group">
+					<label htmlFor="username" className="font-weight-bold login-form__label">Login</label>
+					<input
+						type="text"
+						className="form-control login-form__input"
+						id="username"
+						value={this.state.username}
+						onChange={this.handleChange}
+						name="username"
+						required
+					/>
+					{
+						this.state.errors.noUsername ? 
+						<div className="invalid-feedback d-block login-form__error">
+							Username can contain only letters, numbers, space, dash and apostrophe!
+						</div> : null
+					}
+				</div>
+				<div className="login-form__group form-group">
+					<label htmlFor="exampleInputPassword1" className="font-weight-bold login-form__label">Password</label>
+					<input
+						type="password"
+						className="form-control login-form__input"
+						id="password"
+						value={this.state.password}
+						onChange={this.handleChange}
+						name="password"
+						required
+					/>
+					{
+						this.state.errors.noPassword ?
+						<div className="invalid-feedback d-block login-form__error">Password can not be empty!</div> : null
+					}
+				</div>
+				<div className = "form-check login-form__check">
+					<input type="checkbox" className="form-check-input login-form__input" id="checkbox" />
+					<label className="form-check-label login-form__label" htmlFor="checkbox">Remember me</label>
+				</div>
+				<div className="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+					<input type="submit" className="btn btn-dark mb-3 login-form__submit" onClick={this.onSubmit} value="Log in" />
+					<a href="#" className="font-weight-bold text-dark login-form__link">Need help logging in?</a>
+				</div>
 			</form>
 		);
 	}
